@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <nexus.home>http://localhost:8081/repository</nexus.home>
     </properties>
 
 
@@ -21,18 +22,18 @@
             <id>nexus</id>
             <name>Own Nexus</name>
             <layout>default</layout>
-            <url>http://localhost:8081/repository/maven-public/</url>
+            <url>${nexus.home}/maven-public/</url>
         </repository>
     </repositories>
 
     <distributionManagement>
         <repository>
             <id>nexus-releases</id>
-            <url>http://localhost:8081/repository/maven-releases/</url>
+            <url>${nexus.home}/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://localhost:8081/repository/maven-snapshots/</url>
+            <url>${nexus.home}/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -40,7 +41,7 @@
         <pluginRepository>
             <id>nexus</id>
             <name>Spring Snapshots</name>
-            <url>http://localhost:8081/repository/maven-public/</url>
+            <url>${nexus.home}/maven-public/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -55,4 +56,19 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <activation>
+                <property>
+                    <name>env.BUILD_NUMBER</name>
+                </property>
+            </activation>
+
+            <properties>
+                <nexus.home>http://nexus:8081/repository</nexus.home>
+            </properties>
+        </profile>
+    </profiles>
 </project>
