@@ -5,7 +5,7 @@
 
     <groupId>de.e2</groupId>
     <artifactId>helloworld-lib</artifactId>
-    <version>1.0.1</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>HelloWorld-Lib</name>
 
@@ -20,33 +20,33 @@
     <repositories>
         <repository>
             <id>nexus</id>
-            <name>Own Nexus</name>
+            <name>Nexus</name>
             <layout>default</layout>
-            <url>${nexus.home}/maven-public/</url>
+            <url>http://localhost:8081/repository/maven-public/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <url>${nexus.home}/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>${nexus.home}/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <pluginRepositories>
         <pluginRepository>
             <id>nexus</id>
-            <name>Spring Snapshots</name>
-            <url>${nexus.home}/maven-public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <name>Nexus</name>
+            <url>http://localhost:8081/repository/maven-public/</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <!-- Test -->
